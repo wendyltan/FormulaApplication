@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:padding="10dp"
+              android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/analyte_name"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_weight="1"
+        android:hint="analyte type"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/analyte_body"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_weight="1"
+        android:hint="analyte"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/checkAnalyte"/>
+
+</LinearLayout>

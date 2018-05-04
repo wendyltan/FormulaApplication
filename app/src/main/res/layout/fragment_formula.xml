@@ -1,0 +1,48 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/formula_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="xyz.wendyltanpcy.formulaapplication.Fragment.FormulaFragment">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/formula_recycle">
+
+        </android.support.v7.widget.RecyclerView>
+        <com.ddz.floatingactionbutton.FloatingActionMenu
+            android:id="@+id/fab2"
+            android:layout_gravity="bottom|end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin"
+            app:fab_addButton_icon="@drawable/ic_menu_white_24dp"
+            app:fab_labelStyle="@style/Theme.AppCompat.Light">
+            <!-- 设置fab_title 时， 必须设置 fab_labelStyle ，才会生效-->
+
+            <com.ddz.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_icon="@drawable/ic_add_white_24dp"
+                android:id="@+id/add"
+                app:fab_size="normal"
+                app:fab_title="添加公式" />
+
+            <com.ddz.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_icon="@drawable/ic_delete_white_24dp"
+                app:fab_size="normal"
+                android:id="@+id/delete"
+                app:fab_stroke_visible="false"
+                app:fab_title="删除公式" />
+        </com.ddz.floatingactionbutton.FloatingActionMenu>
+    </FrameLayout>
+</LinearLayout>

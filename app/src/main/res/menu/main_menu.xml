@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="关于" android:id="@+id/about_menu"/>
+    <item android:title="公式数据库" android:id="@+id/formula_db_menu"/>
+    <item android:title="计算页面" android:id="@+id/caculate_menu"/>
+</menu>
