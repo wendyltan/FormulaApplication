@@ -27,7 +27,8 @@ public class FormulaDao extends AbstractDao<Formula, Long> {
         public final static Property FormulaBody = new Property(0, String.class, "formulaBody", false, "FORMULA_BODY");
         public final static Property FormulaName = new Property(1, String.class, "formulaName", false, "FORMULA_NAME");
         public final static Property IsChecked = new Property(2, boolean.class, "isChecked", false, "IS_CHECKED");
-        public final static Property Id = new Property(3, long.class, "id", true, "_id");
+        public final static Property FormulaUnit = new Property(3, String.class, "formulaUnit", false, "FORMULA_UNIT");
+        public final static Property Id = new Property(4, long.class, "id", true, "_id");
     }
 
 
@@ -46,7 +47,8 @@ public class FormulaDao extends AbstractDao<Formula, Long> {
                 "\"FORMULA_BODY\" TEXT," + // 0: formulaBody
                 "\"FORMULA_NAME\" TEXT," + // 1: formulaName
                 "\"IS_CHECKED\" INTEGER NOT NULL ," + // 2: isChecked
-                "\"_id\" INTEGER PRIMARY KEY NOT NULL );"); // 3: id
+                "\"FORMULA_UNIT\" TEXT," + // 3: formulaUnit
+                "\"_id\" INTEGER PRIMARY KEY NOT NULL );"); // 4: id
     }
 
     /** Drops the underlying database table. */
@@ -69,7 +71,12 @@ public class FormulaDao extends AbstractDao<Formula, Long> {
             stmt.bindString(2, formulaName);
         }
         stmt.bindLong(3, entity.getIsChecked() ? 1L: 0L);
-        stmt.bindLong(4, entity.getId());
+ 
+        String formulaUnit = entity.getFormulaUnit();
+        if (formulaUnit != null) {
+            stmt.bindString(4, formulaUnit);
+        }
+        stmt.bindLong(5, entity.getId());
     }
 
     @Override
@@ -86,12 +93,17 @@ public class FormulaDao extends AbstractDao<Formula, Long> {
             stmt.bindString(2, formulaName);
         }
         stmt.bindLong(3, entity.getIsChecked() ? 1L: 0L);
-        stmt.bindLong(4, entity.getId());
+ 
+        String formulaUnit = entity.getFormulaUnit();
+        if (formulaUnit != null) {
+            stmt.bindString(4, formulaUnit);
+        }
+        stmt.bindLong(5, entity.getId());
     }
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 3);
+        return cursor.getLong(offset + 4);
     }    
 
     @Override
@@ -100,7 +112,8 @@ public class FormulaDao extends AbstractDao<Formula, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // formulaBody
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // formulaName
             cursor.getShort(offset + 2) != 0, // isChecked
-            cursor.getLong(offset + 3) // id
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // formulaUnit
+            cursor.getLong(offset + 4) // id
         );
         return entity;
     }
@@ -110,7 +123,8 @@ public class FormulaDao extends AbstractDao<Formula, Long> {
         entity.setFormulaBody(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setFormulaName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setIsChecked(cursor.getShort(offset + 2) != 0);
-        entity.setId(cursor.getLong(offset + 3));
+        entity.setFormulaUnit(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setId(cursor.getLong(offset + 4));
      }
     
     @Override

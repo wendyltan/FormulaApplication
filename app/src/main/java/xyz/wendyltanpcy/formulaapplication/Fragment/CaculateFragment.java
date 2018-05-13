@@ -24,11 +24,11 @@ import com.speedystone.greendaodemo.db.YValueDao;
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.wendyltanpcy.formulaapplication.Adapter.YValueAdapter;
 import xyz.wendyltanpcy.formulaapplication.Model.Formula;
 import xyz.wendyltanpcy.formulaapplication.Model.YValue;
 import xyz.wendyltanpcy.formulaapplication.MyApp;
 import xyz.wendyltanpcy.formulaapplication.R;
-import xyz.wendyltanpcy.formulaapplication.Adapter.YValueAdapter;
 import xyz.wendyltanpcy.formulaapplication.onFloatMenuActionListener;
 
 public class CaculateFragment extends Fragment {
@@ -41,6 +41,7 @@ public class CaculateFragment extends Fragment {
     private YValueDao mYValueDao;
     private List<String> formulaNames = new ArrayList<>();
     private List<String> formulaBodys = new ArrayList<>();
+    private List<String> formulaUnits = new ArrayList<>();
     private int formulaPos=0;
     private boolean isLetter=false;
     private double result;
@@ -87,6 +88,7 @@ public class CaculateFragment extends Fragment {
         final EditText x_enter = v.findViewById(R.id.x_enter);
         Spinner analyte_selector = v.findViewById(R.id.analyte_selector);
         final TextView y_result = v.findViewById(R.id.y_result);
+        final TextView x_unit = v.findViewById(R.id.unit_text);
 
         Button caculate = v.findViewById(R.id.caculate_btn);
         Button save = v.findViewById(R.id.save_btn);
@@ -99,25 +101,32 @@ public class CaculateFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                YValue yValue = new YValue();
-                yValue.setId(mYValues.size());
-                yValue.setY(result);
-                mYValueDao.insert(yValue);
-                mYValues.add(yValue);
-                action("save");
+                if (x_enter.getText()!=null&&!y_result.getText().equals("")){
+                    YValue yValue = new YValue();
+                    yValue.setId(mYValues.size());
+                    yValue.setY(result);
+                    mYValueDao.insert(yValue);
+                    mYValues.add(yValue);
+                    action("save");
 
-                Toast.makeText(getContext(),"y save success!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"y save success!",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(),"You haven't caculate yet!",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
         analyte_selector.setPrompt("Please choose formula");
         initDatas();
+
         adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,formulaNames);
         analyte_selector.setAdapter(adapter);
         analyte_selector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 formulaPos = position;
+                x_unit.setText(formulaUnits.get(formulaPos));
             }
 
             @Override
@@ -172,6 +181,7 @@ public class CaculateFragment extends Fragment {
         for (Formula formula : mFormulaList){
             formulaNames.add(formula.getFormulaName());
             formulaBodys.add(formula.getFormulaBody());
+            formulaUnits.add(formula.getFormulaUnit());
         }
     }
 
@@ -248,6 +258,7 @@ public class CaculateFragment extends Fragment {
                     else if (func.equals("sin")) x = Math.sin(Math.toRadians(x));
                     else if (func.equals("cos")) x = Math.cos(Math.toRadians(x));
                     else if (func.equals("tan")) x = Math.tan(Math.toRadians(x));
+                    else if(func.equals("lg")) x=Math.log10(x);
                     else throw new RuntimeException("Unknown function: " + func);
                 } else {
                     throw new RuntimeException("Unexpected: " + (char)ch);

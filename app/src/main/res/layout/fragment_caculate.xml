@@ -20,10 +20,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Select analyte"
+                android:text="选择公式"
                 android:textSize="18sp"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.3"/>
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Enter x"
+                android:text="曝光值"
                 android:textSize="18sp"
 
                 android:gravity="center_vertical|center_horizontal"
@@ -55,6 +55,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/x_enter"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="lux"
+                android:textSize="18sp"
+
+                android:gravity="center_vertical|center_horizontal"
                 android:layout_weight="0.5"/>
 
 
@@ -70,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="y is "
+                android:text="测量浓度"
                 android:textSize="18sp"
                 android:layout_weight="0.5"/>
 
@@ -80,7 +89,15 @@
                 android:id="@+id/y_result"
                 android:textSize="18sp"
                 android:gravity="center_vertical|center_horizontal"
-                android:hint="y result"
+                android:layout_weight="0.5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/unit_text"
+                android:text="pg/mL"
+                android:textSize="18sp"
+
+                android:gravity="center_vertical|center_horizontal"
                 android:layout_weight="0.5"/>
 
 

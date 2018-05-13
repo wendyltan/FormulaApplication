@@ -43,6 +43,15 @@
                 android:id="@+id/delete"
                 app:fab_stroke_visible="false"
                 app:fab_title="删除公式" />
+
+            <com.ddz.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_icon="@drawable/baseline_edit_white_24dp"
+                app:fab_size="normal"
+                android:id="@+id/edit"
+                app:fab_stroke_visible="false"
+                app:fab_title="编辑公式" />
         </com.ddz.floatingactionbutton.FloatingActionMenu>
     </FrameLayout>
 </LinearLayout>

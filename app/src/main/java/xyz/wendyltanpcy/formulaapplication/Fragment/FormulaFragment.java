@@ -30,6 +30,7 @@ public class FormulaFragment extends Fragment{
     private FloatingActionMenu fl_menu;
     private FloatingActionButton add_button;
     private FloatingActionButton delete_button;
+    private FloatingActionButton edit_button;
     private FormulaDao mFormulaDao;
     private List<Formula> formulaList;
     private RecyclerView FormulaRecyclerView;
@@ -95,6 +96,16 @@ public class FormulaFragment extends Fragment{
                 action("delete");
             }
         });
+        edit_button = v.findViewById(R.id.edit);
+        edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fl_menu.collapse();
+                action("edit");
+            }
+        });
+
+
         return v;
     }
 

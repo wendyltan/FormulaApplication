@@ -70,6 +70,7 @@ public class FormulaAdapter extends RecyclerView.Adapter<FormulaAdapter.ViewHold
             View dialog = View.inflate(context, R.layout.dialog_layout,null);
             final EditText name = dialog.findViewById(R.id.edit_name);
             final EditText body = dialog.findViewById(R.id.edit_body);
+            final EditText unit = dialog.findViewById(R.id.edit_unit);
 
             final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
             builder.setTitle("添加公式");
@@ -83,6 +84,7 @@ public class FormulaAdapter extends RecyclerView.Adapter<FormulaAdapter.ViewHold
                     formula.setId(mFormulaList.size()+1);
                     formula.setFormulaName(name.getText().toString());
                     formula.setFormulaBody(body.getText().toString());
+                    formula.setFormulaUnit(unit.getText().toString());
                     f_dao.insertOrReplace(formula);
                     mFormulaList = f_dao.loadAll();
                     notifyDataSetChanged();
@@ -92,12 +94,55 @@ public class FormulaAdapter extends RecyclerView.Adapter<FormulaAdapter.ViewHold
 
             builder.show();
 
+        }else if(action.equals("edit")){
+            int count = 0;
+            int pos= 0;
+            for (Formula formula:mFormulaList){
+                if (formula.isChecked()){
+                    //delete this formula
+                    count++;
+                    pos = mFormulaList.indexOf(formula);
+                }
+            }
+            if (count>1){
+                Toast.makeText(context,"Please choose one formula to edit!",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                View dialog = View.inflate(context, R.layout.dialog_layout,null);
+                final EditText name = dialog.findViewById(R.id.edit_name);
+                final EditText body = dialog.findViewById(R.id.edit_body);
+                final EditText unit = dialog.findViewById(R.id.edit_unit);
+                final Formula formula = mFormulaList.get(pos);
+                name.setText(formula.getFormulaName());
+                body.setText(formula.getFormulaBody());
+                unit.setText(formula.getFormulaUnit());
+                final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
+                builder.setTitle("编辑公式");
+                builder.setMessage("对公式编辑");
+                builder.setView(dialog);
+                builder.setNegativeButton("取消", null);
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        formula.setFormulaBody(body.getText().toString());
+                        formula.setFormulaName(name.getText().toString());
+                        formula.setFormulaUnit(unit.getText().toString());
+                        f_dao.insertOrReplace(formula);
+                        mFormulaList = f_dao.loadAll();
+                        notifyDataSetChanged();
+                        Toast.makeText(context,"edit formula success!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.show();
+            }
         }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView analyteName;
         TextView analyteBody;
+        TextView analyteUnit;
         CheckBox checkAnalyte;
 
 
@@ -106,6 +151,7 @@ public class FormulaAdapter extends RecyclerView.Adapter<FormulaAdapter.ViewHold
             analyteName = itemView.findViewById(R.id.analyte_name);
             analyteBody = itemView.findViewById(R.id.analyte_body);
             checkAnalyte = itemView.findViewById(R.id.checkAnalyte);
+            analyteUnit = itemView.findViewById(R.id.analyte_unit);
         }
     }
     @Override
@@ -120,6 +166,7 @@ public class FormulaAdapter extends RecyclerView.Adapter<FormulaAdapter.ViewHold
     public void onBindViewHolder(FormulaAdapter.ViewHolder holder, final int position) {
         holder.analyteName.setText(mFormulaList.get(position).getFormulaName());
         holder.analyteBody.setText(mFormulaList.get(position).getFormulaBody());
+        holder.analyteUnit.setText(mFormulaList.get(position).getFormulaUnit());
         holder.checkAnalyte.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

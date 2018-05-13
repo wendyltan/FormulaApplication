@@ -14,13 +14,13 @@ public class Formula {
     private String formulaBody;
     private String formulaName;
     private boolean isChecked;
+    private String formulaUnit;
 
 
 
     @Id
     private long id;
 
-    @Generated(hash = 930721883)
     public Formula(String formulaBody, String formulaName, boolean isChecked,
             long id) {
         this.formulaBody = formulaBody;
@@ -29,8 +29,19 @@ public class Formula {
         this.id = id;
     }
 
-    @Generated(hash = 775514140)
+
     public Formula() {
+    }
+
+
+    @Generated(hash = 1249028562)
+    public Formula(String formulaBody, String formulaName, boolean isChecked,
+            String formulaUnit, long id) {
+        this.formulaBody = formulaBody;
+        this.formulaName = formulaName;
+        this.isChecked = isChecked;
+        this.formulaUnit = formulaUnit;
+        this.id = id;
     }
 
     public void setChecked(boolean checked) {
@@ -71,5 +82,15 @@ public class Formula {
 
     public void setIsChecked(boolean isChecked) {
         this.isChecked = isChecked;
+    }
+
+
+    public String getFormulaUnit() {
+        return this.formulaUnit;
+    }
+
+
+    public void setFormulaUnit(String formulaUnit) {
+        this.formulaUnit = formulaUnit;
     }
 }

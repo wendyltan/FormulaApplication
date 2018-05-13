@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
             android:layout_weight="1"
-            android:text="Enter formula name"/>
+            android:text="输入公式名"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:id="@+id/edit_name"
             android:gravity="center_vertical|center_horizontal"
-            android:hint="name"/>
+            android:hint="公式名"/>
 
     </LinearLayout>
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical"
             android:layout_weight="1"
-            android:text="Enter formula body"/>
+            android:text="输入公式体"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -45,7 +45,35 @@
             android:layout_weight="1"
             android:id="@+id/edit_body"
             android:gravity="center_vertical|center_horizontal"
-            android:hint="body"/>
+            android:hint="公式体"/>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:layout_weight="1"
+            android:text="输入公式单位"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/edit_unit"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="公式单位"/>
+
+
+
 
     </LinearLayout>
 
